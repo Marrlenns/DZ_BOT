@@ -1,16 +1,14 @@
-# from aiogram import types, Dispatcher
-# from config import ADMIN, bot, dp
-# import random
-#
-# async def game(message: types.Message):
-#     if message.text.startswith('game'):
-#         print(type(message.from_user.id), type(ADMIN))
-#         if message.from_user.id in ADMIN:
-#             emojies = ['🎯', '🎳', '🎰', '🎲', '⚽', '️🏀']
-#             rand_game = random.choice(emojies)
-#             await bot.send_dice(message.chat.id, emoji=rand_game)
-#         else:
-#             await message.reply("Эту комманду может использовать только ХОЗЯИН😤")
-#
-# def register_handlers_admin(dp: Dispatcher):
-#     dp.register_message_handler(game)
+from aiogram import types, Dispatcher
+from config import ADMIN, bot, dp
+from database.bot_db import sql_command_all
+
+async def reklama(message: types.Message):
+    if message.from_user.id in ADMIN:
+        result = await sql_commands_get_all_id()
+        for id in result:
+            await bot.send_message(id[0], message.text[3:])
+    else:
+        await message.answer("Ты не мой БОСС!")
+
+def register_handlers_admin(dp: Dispatcher):
+    dp.register_message_handler(reklama, commands=['reklama'])
