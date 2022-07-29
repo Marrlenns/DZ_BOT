@@ -1,6 +1,7 @@
 from aiogram import types, Dispatcher
 from config import ADMIN, bot, dp
-from database.bot_db import sql_command_all
+from database.bot_db import sql_commands_get_all_id
+
 
 async def reklama(message: types.Message):
     if message.from_user.id in ADMIN:
