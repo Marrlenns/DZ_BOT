@@ -23,7 +23,7 @@ async def inline_youtube_handler(query: types.InlineQuery):
     ]
     await query.answer(articles, cache_time=60, is_personal=True)
 
-async def inline_google_handler(query: types.INlineQuery):
+async def inline_google_handler(query: types.InlineQuery):
     text = query.query or "echo"
     link = f"https://www.google.com/search?q={text}"
     result_id: str = hashlib.md5(text.encode()).hexdigest()
