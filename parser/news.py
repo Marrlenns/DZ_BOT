@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://www.securitylab.ru/news/"
+URL = "https://kaktus.media/"
 
 HEADERS = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0"
 }
 
 
@@ -16,15 +16,14 @@ def get_html(url, params=''):
 
 def get_data(html):
     soup = BeautifulSoup(html, "html.parser")
-    items = soup.find_all('a', class_='article-card inline-card')
+    items = soup.find_all('a', class_='Dashboard-Content-Card--name')
     news = []
     for item in items:
         news.append({
-            'time': item.find("time").getText(),
-            'title': item.find("h2", class_='article-card-title').getText(),
-            'desc': item.find("p").getText(),
-            'link': "https://www.securitylab.ru" + item.get('href'),
-            # 'photo': "https://www.securitylab.ru" + item.find('img', class_='d-none').get('src')
+            'title': item.find("span", class_='Dashboard-Content-Card--countComments tolstoy-comments-count').getText(),
+            'Companytitle': item.find("a", class_='CompanyArticles--title').getText(),
+            'upper': item.find("div", class_='Up Up----view').getText(),
+
         })
     return news
 

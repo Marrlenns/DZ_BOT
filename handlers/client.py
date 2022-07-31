@@ -41,7 +41,7 @@ async def show_random_food(message: types.Message):
     await sql_command_random(message)
 
 async def parser_news(message: types.Message):
-    data = news.parser()
+    data = news.parser()[::4]
     for item in data:
         await bot.send_message(
             message.from_user.id,
