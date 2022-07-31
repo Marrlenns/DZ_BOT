@@ -25,7 +25,7 @@ async def sql_command_insert(state):
         cursor.execute("INSERT INTO menu VALUES "
                        "(?, ?, ?, ?)", tuple(data.values()))
         db.commit()
-#
+
 async def sql_command_random(message):
     result = cursor.execute("SELECT * FROM menu").fetchall()
     random_user = random.choice(result)

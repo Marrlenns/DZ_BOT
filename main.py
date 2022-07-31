@@ -3,7 +3,7 @@ from config import dp
 import logging
 import asyncio
 
-from handlers import client, extra, callback, admin, fsmAdminMenu, notification
+from handlers import client, extra, callback, admin, fsmAdminMenu, notification, inline
 from database.bot_db import sql_create
 
 async def on_startup(_):
@@ -11,6 +11,7 @@ async def on_startup(_):
     sql_create()
 
 notification.register_handler_notification(dp)
+inline.register_inline_handler(dp)
 fsmAdminMenu.register_handlers_fsmAdminMenu(dp)
 client.register_handlers_client(dp)
 callback.register_handlers_callback(dp)
