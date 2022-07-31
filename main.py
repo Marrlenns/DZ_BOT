@@ -10,10 +10,10 @@ async def on_startup(_):
     asyncio.create_task(notification.scheduler())
     sql_create()
 
+client.register_handlers_client(dp)
 notification.register_handler_notification(dp)
 inline.register_inline_handler(dp)
 fsmAdminMenu.register_handlers_fsmAdminMenu(dp)
-client.register_handlers_client(dp)
 callback.register_handlers_callback(dp)
 admin.register_handlers_admin(dp)
 extra.register_handlers_extra(dp)

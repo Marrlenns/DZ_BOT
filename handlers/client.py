@@ -3,8 +3,9 @@ import random
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 from config import dp, bot
 from database.bot_db import sql_command_random
+from parser import news
 
-# @dp.message_handler(commands=['mem'])
+
 async def bot_mem(message: types.Message):
     lst = ["media/sherlok.jpg", "media/bot_mem.png", "media/nigga_mem.jpg"]
     photo = open(random.choice(lst), 'rb')
@@ -39,8 +40,19 @@ async def quiz_handler(message: types.Message):
 async def show_random_food(message: types.Message):
     await sql_command_random(message)
 
+async def parser_news(message: types.Message):
+    data = news.parser()
+    for item in data:
+        await bot.send_message(
+            message.from_user.id,
+            f"{item['title']}\n\n"
+            f"{item['Companytitle']}\n"
+            f"{item['upper']}"
+        )
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(bot_mem, commands=['mem'])
     dp.register_message_handler(quiz_handler, commands=['quiz'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!/')
     dp.register_message_handler(show_random_food, commands=['random'])
+    dp.register_message_handler(parser_news, commands=['news'])

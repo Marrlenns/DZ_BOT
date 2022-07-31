@@ -23,7 +23,8 @@ def get_data(html):
             'time': item.find("time").getText(),
             'title': item.find("h2", class_='article-card-title').getText(),
             'desc': item.find("p").getText(),
-            'link': "https://www.securitylab.ru" + item.get('href')
+            'link': "https://www.securitylab.ru" + item.get('href'),
+            # 'photo': "https://www.securitylab.ru" + item.find('img', class_='d-none').get('src')
         })
     return news
 
