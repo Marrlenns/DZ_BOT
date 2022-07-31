@@ -24,4 +24,4 @@ async def inline_youtube_handler(query: types.InlineQuery):
     await query.answer(articles, cache_time=60, is_personal=True)
 
 def register_inline_handler(dp: Dispatcher):
-    dp.register_inline_handler(inline_youtube_handler())
+    dp.register_inline_handler(inline_youtube_handler)
