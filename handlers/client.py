@@ -1,9 +1,9 @@
 from aiogram import types, Dispatcher
 import random
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
-from config import dp, bot
+from config import bot
 from database.bot_db import sql_command_random
-from parser import news
+from handlers import news
 
 
 async def bot_mem(message: types.Message):
