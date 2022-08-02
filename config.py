@@ -8,3 +8,4 @@ TOKEN = config('TOKEN')
 bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot, storage=storage)
 ADMIN = [1519324100]
+URL = "https://dzbotmarlen.herokuapp.com/"
