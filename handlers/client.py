@@ -16,7 +16,7 @@ async def pin(message: types.Message):
         await bot.pin_chat_message(message.chat.id, message.reply_to_message.message_id)
     else:
         await message.reply("Надо ответить на сообщение🙄")
-# @dp.message_handler(commands=['quiz'])
+
 async def quiz_handler(message: types.Message):
     markup = InlineKeyboardMarkup()
     button_1 = InlineKeyboardButton("NEXT", callback_data='button_1')
@@ -41,14 +41,12 @@ async def show_random_food(message: types.Message):
     await sql_command_random(message)
 
 async def parser_news(message: types.Message):
-    data = news.parser()[::4]
+    data = news.parser()[:3]
     for item in data:
-        await bot.send_message(
-            message.from_user.id,
-            f"{item['title']}\n\n"
-            f"{item['Companytitle']}\n"
-            f"{item['upper']}"
-        )
+        await bot.send_message(message.from_user.id,
+                               f"{item['time']}\n"
+                               f"{item['title']}\n"
+                               f"{item['link']}")
 
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(bot_mem, commands=['mem'])
